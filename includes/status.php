@@ -76,7 +76,7 @@ function getCpuStats($ajax = 0) {
 		$cpuLoad = getServerLoad();
 		$avgLoad = (is_null($cpuLoad)) ? 'N/A' : number_format($cpuLoad, 2) . "%";
 		exec("cat /etc/armbianmonitor/datasources/soctemp", $reply);
-		$tempOffset = ($config['cfgTempOffset'] == 'true') ? 28 : 0;
+		$tempOffset = ($config['cfgTempOffset'] == 'true') ? 0 : 0;
 		$cpuTempVal = substr($reply[0], 0, -3) + $tempOffset;
 		$cpuTemp = $cpuTempVal .'℃';
 		$tempWarning = ($cpuTempVal > 60) ? 'bg-warning text-dark' : '';
