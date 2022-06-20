@@ -449,13 +449,13 @@ function sa818Form() {
 			<select id="sa_grp" class="form-select" aria-label="Frecvenţă (MHz)">
 				<option selected disabled>Select a value</option>';
 					/* Generate frequency list (2m & 70cm, no APRS or repeater inputs/outputs) */
-					for ($f=144.000; $f<=148.000; $f+=0.005) {
+					for ($f=144.000; $f<=148.000; $f+=0.025) {
 						if (sprintf("%0.3f", $f) == '144.800') continue;
 						$freqFmt = str_replace('000', '00', sprintf("%0.4f", $f));
 						$freqFmt = (strlen($freqFmt) == 8) ? str_replace(',0','', preg_replace('/\d$/', ',$0', $freqFmt)) : $freqFmt;
 						$sa818Form .= '<option value="'. sprintf("%0.4f", $f) .'">'. $freqFmt .'</option>'. PHP_EOL;
 					}
-					for ($f=430.000; $f<=440.000; $f+=0.005) {
+					for ($f=430.000; $f<=440.000; $f+=0.025) {
 						$sa818Form .= '<option value="'. sprintf("%0.4f", $f) .'">'. sprintf("%0.3f",$f) .'</option>'. PHP_EOL;
 					}
 	$sa818Form .= '</select>
