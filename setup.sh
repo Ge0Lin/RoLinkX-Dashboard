@@ -34,7 +34,7 @@ if systemctl is-enabled $nmService | grep enabled >/dev/null; then
 fi
 
 # Fix possible DNS issues
-if grep '8.8.8.8' /etc/resolvconf/resolv.conf.d/head >/dev/null; then
+if grep '119.29.29.20' /etc/resolvconf/resolv.conf.d/head >/dev/null; then
 	printf 'DNS tweak is present, moving on...\n';
 else
 	printf 'Tweaking DNS\n';
@@ -43,7 +43,7 @@ spawn dpkg-reconfigure -f readline resolvconf
 expect "updates?" { send "Yes\r" }
 expect "dynamic files?" { send "Yes\r" }
 EOF
-	printf 'nameserver 8.8.8.8\nnameserver 8.8.4.4\n' | tee -a /etc/resolvconf/resolv.conf.d/head >/dev/null
+	printf 'nameserver 119.29.29.29\nnameserver 182.254.116.116\n' | tee -a /etc/resolvconf/resolv.conf.d/head >/dev/null
 	resolvconf --enable-updates
 	resolvconf -u
 fi
@@ -51,7 +51,7 @@ fi
 # Setup wpa_supplicant
 if [ ! -f "$wlanCfgFile" ]; then
 	printf "wpa_supplicant.conf was not found so we'll create one with defaults\n";
-	printf 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\nap_scan=1\nfast_reauth=1\ncountry=GB' | tee -a $wlanCfgFile >/dev/null
+	printf 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\nap_scan=1\nfast_reauth=1\ncountry=CN' | tee -a $wlanCfgFile >/dev/null
 	wpa_supplicant -B -c $wlanCfgFile -i wlan0 >/dev/null
 fi
 
